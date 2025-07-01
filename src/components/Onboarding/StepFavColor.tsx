@@ -1,7 +1,7 @@
 import React from "react";
 import { favColors } from "../../constants";
 import { FavColor } from "../../types/UserInfo";
-import InputRadioItem from "../reusable/InputRadioItem";
+import InputRadioItem from "../ui/InputRadioItem";
 
 interface StepFavColorProps {
   favColor?: FavColor;

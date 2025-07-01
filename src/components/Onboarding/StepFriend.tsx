@@ -1,7 +1,7 @@
 import React from "react";
 import { friends } from "../../constants";
 import { Friend } from "../../types/UserInfo";
-import InputRadioItem from "../reusable/InputRadioItem";
+import InputRadioItem from "../ui/InputRadioItem";
 
 interface StepFriendProps {
   friend?: Friend;

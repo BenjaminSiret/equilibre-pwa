@@ -1,4 +1,4 @@
-import NavigationLink from "../reusable/NavigationLink";
+import NavigationLink from "../ui/NavigationLink";
 
 const Navigation = () => {
   return (

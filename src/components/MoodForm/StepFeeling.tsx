@@ -1,5 +1,6 @@
 import React from "react";
 import { Feeling } from "../../types/Mood";
+import Button from "../ui/Button";
 
 interface StepFeelingProps {
   feeling: Feeling | undefined;
@@ -33,23 +34,17 @@ const StepFeeling: React.FC<StepFeelingProps> = ({
         <div className="p-6 flex flex-col gap-3">
           <fieldset>
             <legend className="text-lg mb-3">Feeling</legend>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               {feelings.map((feelingOption) => (
-                <button
+                <Button
                   key={feelingOption}
                   type="button"
                   onClick={() => handleFeelingChange(feelingOption)}
-                  className={`w-full py-2 px-6 rounded-lg text-base font-medium transition-colors border border-[#2563EB]
-                    ${
-                      feeling === feelingOption
-                        ? "bg-[#2563EB] text-white"
-                        : "bg-white text-[#2563EB]"
-                    }
-                  `}
+                  variant={feeling === feelingOption ? "primary" : "secondary"}
                 >
                   {feelingOption.charAt(0).toUpperCase() +
                     feelingOption.slice(1)}
-                </button>
+                </Button>
               ))}
             </div>
           </fieldset>

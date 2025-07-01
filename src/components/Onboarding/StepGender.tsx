@@ -1,7 +1,7 @@
 import React from "react";
 import { genders } from "../../constants";
 import { Gender } from "../../types/UserInfo";
-import InputRadioItem from "../reusable/InputRadioItem";
+import InputRadioItem from "../ui/InputRadioItem";
 
 interface StepGenderProps {
   gender?: Gender;

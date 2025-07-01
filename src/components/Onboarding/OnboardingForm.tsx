@@ -177,11 +177,13 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
           {currentStepId != "SPLASH" && currentStepId != "SUCCESS" && (
             <div className="flex w-full justify-around">
               <button type="button" onClick={handlePrevStep}>
-                Prev
+                Previous
               </button>
-              <button type="button" onClick={handleNextStep}>
-                Next
-              </button>
+              {currentStepId != "CONFIRM" && (
+                <button type="button" onClick={handleNextStep}>
+                  Next
+                </button>
+              )}
             </div>
           )}
           {currentStepId === "SUCCESS" && (
