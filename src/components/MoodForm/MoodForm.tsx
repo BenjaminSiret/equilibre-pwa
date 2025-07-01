@@ -125,33 +125,34 @@ const MoodForm: React.FC = () => {
           setNote={(note: string) =>
             setMood((prevState) => ({ ...prevState, note }))
           }
-          errorMessage={mood.errorMessage}
-          setErrorMessage={(errorMessage: string | null) =>
-            setMood((prevState) => ({ ...prevState, errorMessage }))
-          }
         />
       )}
       {mood.currentStepId === "SUCCESS" && <Success />}
-      <div className="flex gap-4 justify-center p-8">
-        {mood.currentStepId !== "SUCCESS" && (
-          <div className="flex w-full justify-around">
+
+      {/* Espace pour compenser la hauteur de la barre de navigation fixe */}
+      <div className="h-20"></div>
+
+      {/* Barre de navigation fixe */}
+      {mood.currentStepId !== "SUCCESS" && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-10">
+          <div className="flex justify-between max-w-md mx-auto">
             <button
               type="button"
               onClick={handlePrevStep}
-              className="p-4 bg-gray-200 rounded-2xl font-bold shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
+              className="px-8 py-3 bg-gray-200 rounded-xl font-medium shadow-sm"
             >
-              Prev
+              Previous
             </button>
             <button
               type="button"
               onClick={handleNextStep}
-              className="p-4 bg-[#2563EB] rounded-2xl text-white font-bold shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
+              className="px-8 py-3 bg-[#2563EB] rounded-xl text-white font-medium shadow-sm"
             >
               Next
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </form>
   );
 };

@@ -31,13 +31,13 @@ const StepEmotion: React.FC<StepEmotionProps> = ({
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-col flex-1">
-        <div className="bg-[#2563EB] flex-1 p-8">
+        <div className="bg-[#2563EB] p-8 h-[40vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
           <h2 className="mt-8 text-xl">Step 2 on 3</h2>
           <h3 className="text-3xl text-white mt-20">
             How are you feeling today?
           </h3>
         </div>
-        <div className="min-h-40 flex p-8 flex-col gap-4">
+        <div className="p-6 flex flex-col gap-3">
           <fieldset>
             <legend className="text-lg mb-4">Emotion</legend>
             <div className="grid grid-cols-2 gap-3">
@@ -46,11 +46,11 @@ const StepEmotion: React.FC<StepEmotionProps> = ({
                   key={emotionOption}
                   type="button"
                   onClick={() => handleEmotionChange(emotionOption)}
-                  className={`w-full py-3 px-6 rounded-lg text-base font-medium transition-colors
+                  className={`w-full py-3 px-6 rounded-lg text-base font-medium transition-colors border border-[#2563EB]
                     ${
                       emotion === emotionOption
                         ? "bg-[#2563EB] text-white"
-                        : "bg-white text-[#2563EB] border-2 border-[#2563EB]"
+                        : "bg-white text-[#2563EB]"
                     }
                   `}
                 >
@@ -60,13 +60,12 @@ const StepEmotion: React.FC<StepEmotionProps> = ({
               ))}
             </div>
           </fieldset>
+          <div className="h-6 mt-2">
+            {errorMessage && (
+              <span className="text-red-500">{errorMessage}</span>
+            )}
+          </div>
         </div>
-        <span
-          id="emotion-error"
-          className="text-red-500 absolute bottom-20 left-8"
-        >
-          {errorMessage}
-        </span>
       </div>
     </div>
   );
