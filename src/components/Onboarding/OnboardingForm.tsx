@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import usePouchDb from "../../hooks/usePouchDb";
 import { useUserStore } from "../../store/userStore";
 import { FavColor, Friend, Gender, UserInfo } from "../../types/UserInfo";
+import Button from "../ui/Button";
 import OnboardingConfirm from "./OnboardingConfirm";
 import OnboardingSuccess from "./OnboardingSuccess";
 import StepFavColor from "./StepFavColor";
@@ -173,16 +174,20 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
         {currentStepId == "SUCCESS" && (
           <OnboardingSuccess username={user.username} />
         )}
-        <div className="flex gap-4 justify-center p-8">
+        <div className="flex gap-4 justify-center p-4">
           {currentStepId != "SPLASH" && currentStepId != "SUCCESS" && (
-            <div className="flex w-full justify-around">
-              <button type="button" onClick={handlePrevStep}>
+            <div className="flex w-full justify-between">
+              <Button
+                type="button"
+                onClick={handlePrevStep}
+                variant="secondary"
+              >
                 Previous
-              </button>
+              </Button>
               {currentStepId != "CONFIRM" && (
-                <button type="button" onClick={handleNextStep}>
+                <Button type="button" onClick={handleNextStep}>
                   Next
-                </button>
+                </Button>
               )}
             </div>
           )}

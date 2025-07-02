@@ -31,7 +31,7 @@ const StepFeeling: React.FC<StepFeelingProps> = ({
             How would you describe your general feeling?
           </h3>
         </div>
-        <div className="p-6 flex flex-col gap-3">
+        <div className="p-4 flex flex-col gap-3">
           <fieldset>
             <legend className="text-lg mb-3">Feeling</legend>
             <div className="flex flex-col gap-2">
