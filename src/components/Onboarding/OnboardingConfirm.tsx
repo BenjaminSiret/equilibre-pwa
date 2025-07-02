@@ -1,8 +1,7 @@
 import React from "react";
+import Button from "../ui/Button";
 
-const StepConfirm: React.FC<{
-  handleOnboardingSubmit: (e: React.FormEvent) => void;
-}> = ({ handleOnboardingSubmit }) => {
+const StepConfirm: React.FC = () => {
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-col flex-1">
@@ -15,13 +14,9 @@ const StepConfirm: React.FC<{
             If you want to make any changes, you can go back. Otherwise, please
             confirm your information.
           </p>
-          <button
-            type="submit"
-            onClick={handleOnboardingSubmit}
-            className="py-2 px-4 bg-[#2563EB] text-white rounded-sm"
-          >
+          <Button type="submit" variant="primary">
             Confirm and Continue
-          </button>
+          </Button>
         </div>
       </div>
     </div>

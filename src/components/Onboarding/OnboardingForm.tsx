@@ -168,9 +168,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
             setErrorMessage={setErrorMessage}
           />
         )}
-        {currentStepId == "CONFIRM" && (
-          <OnboardingConfirm handleOnboardingSubmit={handleOnboardingSubmit} />
-        )}
+        {currentStepId == "CONFIRM" && <OnboardingConfirm />}
         {currentStepId == "SUCCESS" && (
           <OnboardingSuccess username={user.username} />
         )}
