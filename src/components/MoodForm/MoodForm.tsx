@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useMoods from "../../hooks/useMoods";
 import { Emotion, Feeling, Mood } from "../../types/Mood";
+import Button from "../ui/Button";
 import Success from "./MoodFormSuccess";
 import StepEmotion from "./StepEmotion";
 import StepFeeling from "./StepFeeling";
@@ -136,20 +137,12 @@ const MoodForm: React.FC = () => {
       {mood.currentStepId !== "SUCCESS" && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-10">
           <div className="flex justify-between max-w-md mx-auto">
-            <button
-              type="button"
-              onClick={handlePrevStep}
-              className="px-8 py-3 bg-gray-200 rounded-xl font-medium shadow-sm"
-            >
+            <Button type="button" onClick={handlePrevStep} variant="secondary">
               Previous
-            </button>
-            <button
-              type="button"
-              onClick={handleNextStep}
-              className="px-8 py-3 bg-[#2563EB] rounded-xl text-white font-medium shadow-sm"
-            >
+            </Button>
+            <Button type="button" onClick={handleNextStep} variant="primary">
               Next
-            </button>
+            </Button>
           </div>
         </div>
       )}
