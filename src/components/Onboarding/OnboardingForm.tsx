@@ -146,6 +146,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
             setGender={(gender: Gender) => setUserAttribute("gender", gender)}
             errorMessage={errorMessage}
             setErrorMessage={setErrorMessage}
+            username={user.username}
           />
         )}
         {currentStepId == "FAVCOLOR" && (

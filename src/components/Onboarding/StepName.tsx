@@ -31,8 +31,8 @@ const StepUsername: React.FC<StepUsernameProps> = ({
     <div className="flex flex-col flex-1">
       <div className="flex flex-col flex-1">
         <div className="bg-[#2563EB] p-4 h-[50vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
-          <h2 className="mt-8 text-xl">Step 1 on 4</h2>
-          <h3 className="text-3xl text-white mt-20">
+          <h2 className="text-xl">Step 1 on 4</h2>
+          <h3 className="text-3xl text-white">
             Hello friend, how can I call you?
           </h3>
         </div>

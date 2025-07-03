@@ -8,6 +8,7 @@ interface StepGenderProps {
   setGender: (value: Gender) => void;
   errorMessage: string | null;
   setErrorMessage: (errorMessage: string | null) => void;
+  username: string;
 }
 
 const StepGender: React.FC<StepGenderProps> = ({
@@ -15,6 +16,7 @@ const StepGender: React.FC<StepGenderProps> = ({
   setGender,
   errorMessage,
   setErrorMessage,
+  username,
 }) => {
   const handleGenderChange = (selectedGender: Gender) => {
     setGender(selectedGender);
@@ -25,8 +27,10 @@ const StepGender: React.FC<StepGenderProps> = ({
     <div className="flex flex-col flex-1">
       <div className="flex flex-col flex-1">
         <div className="bg-[#2563EB] p-4 h-[50vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
-          <h2 className="mt-8 text-xl">Step 2 on 4</h2>
-          <h3 className="text-3xl text-white mt-20">How do you identify?</h3>
+          <h2 className="text-xl">Step 2 on 4</h2>
+          <h3 className="text-3xl text-white">
+            Nice to meet you {username}, how do you identify?
+          </h3>
         </div>
         <div className="min-h-40 flex p-4 pt-8 flex-col">
           <fieldset>
