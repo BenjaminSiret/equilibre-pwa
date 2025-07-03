@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import React from "react";
 import friendGif from "../../assets/animations/friend.gif";
+import Button from "../ui/Button";
 
 const MoodFormSuccess: React.FC = () => {
   return (
@@ -13,12 +14,9 @@ const MoodFormSuccess: React.FC = () => {
           <img src={friendGif} alt="friend animation" className="max-h-96" />
         </div>
         <div className="min-h-40 flex p-8 flex-col">
-          <Link
-            to="/"
-            className="w-full py-3 px-6 rounded-lg text-base font-medium bg-[#2563EB] text-white text-center"
-          >
+          <Button as={Link} to="/">
             Back to Home
-          </Link>
+          </Button>
         </div>
       </div>
     </div>

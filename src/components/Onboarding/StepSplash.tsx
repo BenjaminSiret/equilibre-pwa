@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../ui/Button";
 
 interface StepSplashProps {
   handleNextStep: () => void;
@@ -13,12 +14,7 @@ const StepSplash: React.FC<StepSplashProps> = ({ handleNextStep }) => {
           Follow your mood, cultivate your health.
         </p>
       </div>
-      <button
-        onClick={handleNextStep}
-        className="p-3 pr-24 pb-3 pl-24 bg-[#2563EB] rounded-2xl translate-y-[-100%] text-white font-bold shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
-      >
-        Start
-      </button>
+      <Button onClick={handleNextStep}>Start</Button>
     </div>
   );
 };

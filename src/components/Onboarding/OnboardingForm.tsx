@@ -190,13 +190,14 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
             </div>
           )}
           {currentStepId === "SUCCESS" && (
-            <Link
-              to={"/mood"}
+            <Button
+              as={Link}
+              to="/mood"
               onClick={() => setOnboardingCompleted(true)}
-              className="p-4 bg-[#2563EB] rounded-2xl text-white font-bold shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]"
+              variant="primary"
             >
               {loading ? "Loading..." : "Start your journey"}
-            </Link>
+            </Button>
           )}
         </div>
       </form>

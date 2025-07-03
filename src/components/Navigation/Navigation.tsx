@@ -1,13 +1,18 @@
-import NavigationLink from "../ui/NavigationLink";
+import { Link } from "@tanstack/react-router";
+import Button from "../ui/Button";
 
 const Navigation = () => {
   return (
-    <nav className="fixed justify-between w-full bottom-0 pb-4 sm:px-4">
-      <ul className="flex gap-4 justify-between w-full">
-        <NavigationLink page="/" pageTitle="Index" />
-        <NavigationLink page="/mood" pageTitle="Mood" />
-        <NavigationLink page="/journal" pageTitle="Journal" />
-      </ul>
+    <nav className="flex justify-center gap-4 p-4 bg-gray-100">
+      <Button as={Link} to="/" variant="secondary">
+        Index
+      </Button>
+      <Button as={Link} to="/mood" variant="secondary">
+        Mood
+      </Button>
+      <Button as={Link} to="/journal" variant="secondary">
+        Journal
+      </Button>
     </nav>
   );
 };
