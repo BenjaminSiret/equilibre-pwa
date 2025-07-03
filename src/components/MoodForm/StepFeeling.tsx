@@ -33,7 +33,7 @@ const StepFeeling: React.FC<StepFeelingProps> = ({
         </div>
         <div className="p-4 flex flex-col gap-3">
           <fieldset>
-            <legend className="text-lg mb-3">Feeling</legend>
+            <legend className="text-lg mb-3">It feels...</legend>
             <div className="flex flex-col gap-2">
               {feelings.map((feelingOption) => (
                 <Button

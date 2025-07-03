@@ -30,7 +30,7 @@ const StepGender: React.FC<StepGenderProps> = ({
         </div>
         <div className="min-h-40 flex p-4 pt-8 flex-col">
           <fieldset>
-            <legend className="text-lg mb-4 ">Select your gender</legend>
+            <legend className="text-lg mb-4 ">I identify as...</legend>
             {genders.map((genderOption) => (
               <InputRadioItem
                 key={genderOption}
