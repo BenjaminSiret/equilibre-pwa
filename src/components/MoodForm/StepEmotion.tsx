@@ -1,6 +1,6 @@
 import React from "react";
 import { Emotion } from "../../types/Mood";
-import Button from "../ui/Button";
+import RadioCard from "../ui/RadioCard";
 
 interface StepEmotionProps {
   emotion: Emotion | undefined;
@@ -44,16 +44,20 @@ const StepEmotion: React.FC<StepEmotionProps> = ({
               I resonate the most with...
             </legend>
             <div className="grid grid-cols-2 gap-3">
-              {emotions.map((emotionOption) => (
-                <Button
+              {emotions.map((emotionOption, index) => (
+                <RadioCard
                   key={emotionOption}
-                  type="button"
-                  onClick={() => handleEmotionChange(emotionOption)}
-                  variant={emotion === emotionOption ? "primary" : "secondary"}
-                >
-                  {emotionOption.charAt(0).toUpperCase() +
-                    emotionOption.slice(1)}
-                </Button>
+                  label={
+                    emotionOption.charAt(0).toUpperCase() +
+                    emotionOption.slice(1)
+                  }
+                  value={emotionOption}
+                  checked={emotion === emotionOption}
+                  name="emotion"
+                  fullWidth={true}
+                  autofocus={index === 0}
+                  onChange={(value) => handleEmotionChange(value as Emotion)}
+                />
               ))}
             </div>
           </fieldset>
