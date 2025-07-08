@@ -1,7 +1,7 @@
 import React from "react";
 import { favColors } from "../../constants";
 import { FavColor } from "../../types/UserInfo";
-import InputRadioItem from "../ui/InputRadioItem";
+import RadioCard from "../ui/RadioCard";
 
 interface StepFavColorProps {
   favColor?: FavColor;
@@ -33,24 +33,28 @@ const StepFavColor: React.FC<StepFavColorProps> = ({
         <div className="min-h-40 flex p-4 pt-8 flex-col ">
           <fieldset>
             <legend className="text-lg mb-4">Select your favorite color</legend>
-            {favColors.map((color) => (
-              <InputRadioItem
-                key={color}
-                onChange={() => handleFavColorChange(color)}
-                item={color}
-                state={favColor}
-                name="favColor"
-                aria-describedby="color-error"
-              />
-            ))}
+            <div className="grid grid-cols-2 gap-3">
+              {favColors.map((color, index) => (
+                <RadioCard
+                  key={color}
+                  onChange={(value) => handleFavColorChange(value as FavColor)}
+                  value={color}
+                  checked={favColor === color}
+                  name="favColor"
+                  label={color.charAt(0).toUpperCase() + color.slice(1)}
+                  fullWidth={true}
+                  autofocus={index === 0}
+                  aria-describedby={errorMessage ? "color-error" : undefined}
+                />
+              ))}
+            </div>
           </fieldset>
+          <div className="h-6 mt-2">
+            {errorMessage && (
+              <span className="text-red-500">{errorMessage}</span>
+            )}
+          </div>
         </div>
-        <span
-          id="color-error"
-          className="text-red-500 absolute bottom-20 left-8"
-        >
-          {errorMessage}
-        </span>
       </div>
     </div>
   );

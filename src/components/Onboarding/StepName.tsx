@@ -53,13 +53,8 @@ const StepUsername: React.FC<StepUsernameProps> = ({
             className="border-b-4 border-[#2563EB] pt-7 pb-2 focus:outline-hidden mb-11"
             aria-describedby="firstname-error"
           />
+          {errorMessage && <span className="text-red-500">{errorMessage}</span>}
         </div>
-        <span
-          id="firstname-error"
-          className="text-red-500 absolute bottom-20 left-8"
-        >
-          {errorMessage}
-        </span>
       </div>
     </div>
   );

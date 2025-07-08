@@ -1,7 +1,7 @@
 import React from "react";
 import { friends } from "../../constants";
 import { Friend } from "../../types/UserInfo";
-import InputRadioItem from "../ui/InputRadioItem";
+import RadioCard from "../ui/RadioCard";
 
 interface StepFriendProps {
   friend?: Friend;
@@ -33,24 +33,26 @@ const StepFriend: React.FC<StepFriendProps> = ({
         <div className="min-h-40 flex p-4 pt-8 flex-col">
           <fieldset>
             <legend className="text-lg mb-4">Select your friend</legend>
-            {friends.map((friendItem) => (
-              <InputRadioItem
+            {friends.map((friendItem, index) => (
+              <RadioCard
                 key={friendItem}
-                onChange={() => handleSetFriend(friendItem)}
-                item={friendItem}
-                state={friend}
+                onChange={(value) => handleSetFriend(value as Friend)}
+                value={friendItem}
+                checked={friend === friendItem}
                 name="friend"
-                aria-describedby="friend-error"
+                label={friendItem.charAt(0).toUpperCase() + friendItem.slice(1)}
+                fullWidth={true}
+                autofocus={index === 0}
+                aria-describedby={errorMessage ? "friend-error" : undefined}
               />
             ))}
           </fieldset>
+          <div className="h-6 mt-2">
+            {errorMessage && (
+              <span className="text-red-500">{errorMessage}</span>
+            )}
+          </div>
         </div>
-        <span
-          id="friend-error"
-          className="text-red-500 absolute bottom-20 left-8"
-        >
-          {errorMessage}
-        </span>
       </div>
     </div>
   );
