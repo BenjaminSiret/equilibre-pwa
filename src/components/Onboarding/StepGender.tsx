@@ -1,7 +1,7 @@
 import React from "react";
 import { genders } from "../../constants";
 import { Gender } from "../../types/UserInfo";
-import InputRadioItem from "../ui/InputRadioItem";
+import RadioCard from "../ui/RadioCard";
 
 interface StepGenderProps {
   gender?: Gender;
@@ -35,25 +35,31 @@ const StepGender: React.FC<StepGenderProps> = ({
         <div className="min-h-40 flex p-4 pt-8 flex-col">
           <fieldset>
             <legend className="text-lg mb-4 ">I identify as...</legend>
-            {genders.map((genderOption) => (
-              <InputRadioItem
-                key={genderOption}
-                onChange={() => handleGenderChange(genderOption)}
-                item={genderOption}
-                state={gender}
-                name="gender"
-                aria-describedby="gender-error"
-              />
-            ))}
+            <div className="flex flex-col gap-2">
+              {genders.map((genderOption) => (
+                <RadioCard
+                  key={genderOption}
+                  onChange={(value: string) =>
+                    handleGenderChange(value as Gender)
+                  }
+                  value={genderOption}
+                  checked={gender === genderOption}
+                  name="gender"
+                  label={genderOption}
+                  fullWidth={true}
+                  autofocus={true}
+                  aria-describedby={errorMessage ? "gender-error" : undefined}
+                />
+              ))}
+            </div>
           </fieldset>
+          <div className="h-6 mt-2">
+            {errorMessage && (
+              <span className="text-red-500">{errorMessage}</span>
+            )}
+          </div>
         </div>
       </div>
-      <span
-        id="gender-error"
-        className="text-red-500 absolute bottom-20 left-8"
-      >
-        {errorMessage}
-      </span>
     </div>
   );
 };
