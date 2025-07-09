@@ -1,11 +1,11 @@
 import React from "react";
 import friendGif from "../../assets/animations/friend.gif";
 
-interface OnboardingSuccessProps {
+interface StepSuccessProps {
   username: string;
 }
 
-const OnboardingSuccess: React.FC<OnboardingSuccessProps> = ({ username }) => {
+const StepSuccess: React.FC<StepSuccessProps> = ({ username }) => {
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-col flex-1">
@@ -20,4 +20,4 @@ const OnboardingSuccess: React.FC<OnboardingSuccessProps> = ({ username }) => {
   );
 };
 
-export default OnboardingSuccess;
+export default StepSuccess;

@@ -4,8 +4,8 @@ import usePouchDb from "../../hooks/usePouchDb";
 import { useUserStore } from "../../store/userStore";
 import { FavColor, Friend, Gender, UserInfo } from "../../types/UserInfo";
 import Button from "../ui/Button";
-import OnboardingConfirm from "./OnboardingConfirm";
-import OnboardingSuccess from "./OnboardingSuccess";
+import OnboardingSuccess from "./StepSuccess";
+import StepConfirm from "./StepConfirm";
 import StepFavColor from "./StepFavColor";
 import StepFriend from "./StepFriend";
 import StepGender from "./StepGender";
@@ -22,7 +22,7 @@ const ONBOARDING_STEPS = [
   { id: "GENDER", component: StepGender },
   { id: "FAVCOLOR", component: StepFavColor },
   { id: "FRIEND", component: StepFriend },
-  { id: "CONFIRM", component: OnboardingConfirm },
+  { id: "CONFIRM", component: StepConfirm },
   { id: "SUCCESS", component: OnboardingSuccess },
 ];
 
@@ -123,59 +123,65 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
     <>
       <form
         onSubmit={handleOnboardingSubmit}
-        className="w-full h-full"
+        className="w-full h-dvh flex flex-col"
         noValidate
       >
-        {currentStepId == "SPLASH" && (
-          <StepSplash handleNextStep={handleNextStep} />
-        )}
-        {currentStepId == "USERNAME" && (
-          <StepUsername
-            handleNextStep={handleNextStep}
-            errorMessage={errorMessage}
-            username={user.username}
-            setUsername={(username: string) =>
-              setUserAttribute("username", username)
-            }
-            setErrorMessage={setErrorMessage}
-          />
-        )}
-        {currentStepId == "GENDER" && (
-          <StepGender
-            gender={user.gender}
-            setGender={(gender: Gender) => setUserAttribute("gender", gender)}
-            errorMessage={errorMessage}
-            setErrorMessage={setErrorMessage}
-            username={user.username}
-          />
-        )}
-        {currentStepId == "FAVCOLOR" && (
-          <StepFavColor
-            favColor={user.favColor}
-            setFavColor={(favColor: FavColor) =>
-              setUserAttribute("favColor", favColor)
-            }
-            errorMessage={errorMessage}
-            setErrorMessage={setErrorMessage}
-          />
-        )}
-        {currentStepId == "FRIEND" && (
-          <StepFriend
-            friend={user.friend}
-            setFriend={(friend: Friend) => {
-              setUserAttribute("friend", friend);
-            }}
-            errorMessage={errorMessage}
-            setErrorMessage={setErrorMessage}
-          />
-        )}
-        {currentStepId == "CONFIRM" && <OnboardingConfirm />}
-        {currentStepId == "SUCCESS" && (
-          <OnboardingSuccess username={user.username} />
-        )}
-        <div className="flex gap-4 justify-center p-4">
-          {currentStepId != "SPLASH" && currentStepId != "SUCCESS" && (
-            <div className="flex w-full justify-between">
+        <div className="flex-1 overflow-y-auto">
+          {currentStepId == "SPLASH" && (
+            <StepSplash handleNextStep={handleNextStep} />
+          )}
+          {currentStepId == "USERNAME" && (
+            <StepUsername
+              handleNextStep={handleNextStep}
+              errorMessage={errorMessage}
+              username={user.username}
+              setUsername={(username: string) =>
+                setUserAttribute("username", username)
+              }
+              setErrorMessage={setErrorMessage}
+            />
+          )}
+          {currentStepId == "GENDER" && (
+            <StepGender
+              gender={user.gender}
+              setGender={(gender: Gender) => setUserAttribute("gender", gender)}
+              errorMessage={errorMessage}
+              setErrorMessage={setErrorMessage}
+              username={user.username}
+            />
+          )}
+          {currentStepId == "FAVCOLOR" && (
+            <StepFavColor
+              favColor={user.favColor}
+              setFavColor={(favColor: FavColor) =>
+                setUserAttribute("favColor", favColor)
+              }
+              errorMessage={errorMessage}
+              setErrorMessage={setErrorMessage}
+            />
+          )}
+          {currentStepId == "FRIEND" && (
+            <StepFriend
+              friend={user.friend}
+              setFriend={(friend: Friend) => {
+                setUserAttribute("friend", friend);
+              }}
+              errorMessage={errorMessage}
+              setErrorMessage={setErrorMessage}
+            />
+          )}
+          {currentStepId == "CONFIRM" && <StepConfirm />}
+          {currentStepId == "SUCCESS" && (
+            <OnboardingSuccess username={user.username} />
+          )}
+          {currentStepId !== "SPLASH" && currentStepId !== "SUCCESS" && (
+            <div className="h-20" />
+          )}
+        </div>
+
+        {currentStepId != "SPLASH" && currentStepId != "SUCCESS" && (
+          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-10">
+            <div className="flex justify-between max-w-md mx-auto">
               <Button
                 type="button"
                 onClick={handlePrevStep}
@@ -188,19 +194,24 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
                   Next
                 </Button>
               )}
+              {currentStepId === "CONFIRM" && (
+                <Button type="submit" disabled={loading}>
+                  {loading ? "Confirming..." : "Confirm and start"}
+                </Button>
+              )}
             </div>
-          )}
-          {currentStepId === "SUCCESS" && (
-            <Button
-              as={Link}
-              to="/mood"
-              onClick={() => setOnboardingCompleted(true)}
-              variant="primary"
-            >
-              {loading ? "Loading..." : "Start your journey"}
-            </Button>
-          )}
-        </div>
+          </div>
+        )}
+        {currentStepId === "SUCCESS" && (
+          <Button
+            as={Link}
+            to="/mood"
+            onClick={() => setOnboardingCompleted(true)}
+            variant="primary"
+          >
+            {loading ? "Loading..." : "Start your journey"}
+          </Button>
+        )}
       </form>
     </>
   );
