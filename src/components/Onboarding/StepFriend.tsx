@@ -1,7 +1,7 @@
 import React from "react";
 import { friends } from "../../constants";
 import { Friend } from "../../types/UserInfo";
-import InputRadioItem from "../reusable/InputRadioItem";
+import RadioCard from "../ui/RadioCard";
 
 interface StepFriendProps {
   friend?: Friend;
@@ -24,33 +24,39 @@ const StepFriend: React.FC<StepFriendProps> = ({
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-col flex-1">
-        <div className="bg-[#2563EB] p-8 h-[50vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
+        <div className="bg-[#2563EB] p-4 h-[50vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
           <h2 className="mt-8 text-xl">Step 3 on 4</h2>
           <h3 className="text-3xl text-white mt-20">
             Well noted, select a friend for this journey
           </h3>
         </div>
-        <div className="min-h-40 flex p-8 flex-col">
+        <div className="min-h-40 flex p-4 pt-8 flex-col">
           <fieldset>
             <legend className="text-lg mb-4">Select your friend</legend>
-            {friends.map((friendItem) => (
-              <InputRadioItem
-                key={friendItem}
-                onChange={() => handleSetFriend(friendItem)}
-                item={friendItem}
-                state={friend}
-                name="friend"
-                aria-describedby="friend-error"
-              />
-            ))}
+            <div className="flex flex-col gap-2">
+              {friends.map((friendItem, index) => (
+                <RadioCard
+                  key={friendItem}
+                  onChange={(value) => handleSetFriend(value as Friend)}
+                  value={friendItem}
+                  checked={friend === friendItem}
+                  name="friend"
+                  label={
+                    friendItem.charAt(0).toUpperCase() + friendItem.slice(1)
+                  }
+                  fullWidth={true}
+                  autofocus={index === 0}
+                  aria-describedby={errorMessage ? "friend-error" : undefined}
+                />
+              ))}
+            </div>
           </fieldset>
+          <div className="h-6 mt-2">
+            {errorMessage && (
+              <span className="text-red-500">{errorMessage}</span>
+            )}
+          </div>
         </div>
-        <span
-          id="friend-error"
-          className="text-red-500 absolute bottom-20 left-8"
-        >
-          {errorMessage}
-        </span>
       </div>
     </div>
   );

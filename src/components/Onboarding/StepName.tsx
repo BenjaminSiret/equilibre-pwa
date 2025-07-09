@@ -30,13 +30,13 @@ const StepUsername: React.FC<StepUsernameProps> = ({
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-col flex-1">
-        <div className="bg-[#2563EB] p-8 h-[50vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
-          <h2 className="mt-8 text-xl">Step 1 on 4</h2>
-          <h3 className="text-3xl text-white mt-20">
+        <div className="bg-[#2563EB] p-4 h-[50vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
+          <h2 className="text-xl">Step 1 on 4</h2>
+          <h3 className="text-3xl text-white">
             Hello friend, how can I call you?
           </h3>
         </div>
-        <div className="min-h-40 flex p-8 flex-col">
+        <div className="min-h-40 flex p-4 pt-8 flex-col">
           <label htmlFor="name" className="text-lg">
             My name is...
           </label>
@@ -53,13 +53,8 @@ const StepUsername: React.FC<StepUsernameProps> = ({
             className="border-b-4 border-[#2563EB] pt-7 pb-2 focus:outline-hidden mb-11"
             aria-describedby="firstname-error"
           />
+          {errorMessage && <span className="text-red-500">{errorMessage}</span>}
         </div>
-        <span
-          id="firstname-error"
-          className="text-red-500 absolute bottom-20 left-8"
-        >
-          {errorMessage}
-        </span>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { Feeling } from "../../types/Mood";
+import RadioCard from "../ui/RadioCard";
 
 interface StepFeelingProps {
   feeling: Feeling | undefined;
@@ -26,30 +27,28 @@ const StepFeeling: React.FC<StepFeelingProps> = ({
       <div className="flex flex-col flex-1">
         <div className="bg-[#2563EB] p-8 h-[40vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
           <h2 className="text-xl">Step 1 on 3</h2>
-          <h3 className="text-3xl text-white">
+          <h3 className="text-3xl text-white" id="feeling-step-title">
             How would you describe your general feeling?
           </h3>
         </div>
-        <div className="p-6 flex flex-col gap-3">
-          <fieldset>
-            <legend className="text-lg mb-3">Feeling</legend>
-            <div className="flex flex-col gap-3">
-              {feelings.map((feelingOption) => (
-                <button
+        <div className="p-4 flex flex-col gap-3">
+          <fieldset aria-describedby="feeling-step-title">
+            <legend className="text-lg mb-3">It feels...</legend>
+            <div className="flex flex-col gap-2">
+              {feelings.map((feelingOption, index) => (
+                <RadioCard
                   key={feelingOption}
-                  type="button"
-                  onClick={() => handleFeelingChange(feelingOption)}
-                  className={`w-full py-2 px-6 rounded-lg text-base font-medium transition-colors border border-[#2563EB]
-                    ${
-                      feeling === feelingOption
-                        ? "bg-[#2563EB] text-white"
-                        : "bg-white text-[#2563EB]"
-                    }
-                  `}
-                >
-                  {feelingOption.charAt(0).toUpperCase() +
-                    feelingOption.slice(1)}
-                </button>
+                  label={
+                    feelingOption.charAt(0).toUpperCase() +
+                    feelingOption.slice(1)
+                  }
+                  value={feelingOption}
+                  checked={feeling === feelingOption}
+                  name="feeling"
+                  fullWidth={true}
+                  autofocus={index === 0}
+                  onChange={(value) => handleFeelingChange(value as Feeling)}
+                />
               ))}
             </div>
           </fieldset>

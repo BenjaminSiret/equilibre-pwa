@@ -14,16 +14,17 @@ const StepNote: React.FC<StepNoteProps> = ({ note, setNote }) => {
     <div className="flex flex-col flex-1">
       <div className="flex flex-col flex-1">
         <div className="bg-[#2563EB] p-8 h-[40vh] min-h-[200px] max-h-[300px] flex flex-col justify-between">
-          <h2 className="mt-8 text-xl">Step 3 on 3</h2>
-          <h3 className="text-3xl text-white mt-20">
+          <h2 className="text-xl">Step 3 on 3</h2>
+          <h3 className="text-3xl text-white" id="notes-step-title">
             Would you like to add any notes?
           </h3>
         </div>
         <div className="p-6 flex flex-col gap-3">
-          <fieldset>
+          <fieldset aria-describedby="notes-step-title">
             <legend className="text-lg">Notes</legend>
             <textarea
               value={note}
+              autoFocus
               onChange={handleNoteChange}
               className="border-2 border-gray-300 p-2 w-full"
               rows={8}

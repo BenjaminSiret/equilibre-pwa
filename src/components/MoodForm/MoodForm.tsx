@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import useMoods from "../../hooks/useMoods";
 import { Emotion, Feeling, Mood } from "../../types/Mood";
-import Success from "./MoodFormSuccess";
+import Button from "../ui/Button";
 import StepEmotion from "./StepEmotion";
 import StepFeeling from "./StepFeeling";
+import StepMoodSuccess from "./StepMoodSuccess";
 import StepNote from "./StepNote";
 
 const MOOD_STEPS = [
   { id: "FEELING", component: StepFeeling },
   { id: "EMOTION", component: StepEmotion },
   { id: "NOTE", component: StepNote },
-  { id: "SUCCESS", component: Success },
+  { id: "SUCCESS", component: StepMoodSuccess },
 ];
 
 const MoodForm: React.FC = () => {
@@ -94,62 +95,60 @@ const MoodForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleFormSubmission} className="w-full h-full" noValidate>
-      {mood.currentStepId === "FEELING" && (
-        <StepFeeling
-          feeling={mood.feeling}
-          setFeeling={(feeling: Feeling) =>
-            setMood((prevState) => ({ ...prevState, feeling }))
-          }
-          errorMessage={mood.errorMessage}
-          setErrorMessage={(errorMessage: string | null) =>
-            setMood((prevState) => ({ ...prevState, errorMessage }))
-          }
-        />
-      )}
-      {mood.currentStepId === "EMOTION" && (
-        <StepEmotion
-          emotion={mood.emotion}
-          setEmotion={(emotion: Emotion) =>
-            setMood((prevState) => ({ ...prevState, emotion }))
-          }
-          errorMessage={mood.errorMessage}
-          setErrorMessage={(errorMessage: string | null) =>
-            setMood((prevState) => ({ ...prevState, errorMessage }))
-          }
-        />
-      )}
-      {mood.currentStepId === "NOTE" && (
-        <StepNote
-          note={mood.note}
-          setNote={(note: string) =>
-            setMood((prevState) => ({ ...prevState, note }))
-          }
-        />
-      )}
-      {mood.currentStepId === "SUCCESS" && <Success />}
+    <form
+      onSubmit={handleFormSubmission}
+      className="w-full h-dvh flex flex-col"
+      noValidate
+    >
+      <div className="flex-1 overflow-y-auto">
+        {mood.currentStepId === "FEELING" && (
+          <StepFeeling
+            feeling={mood.feeling}
+            setFeeling={(feeling: Feeling) =>
+              setMood((prevState) => ({ ...prevState, feeling }))
+            }
+            errorMessage={mood.errorMessage}
+            setErrorMessage={(errorMessage: string | null) =>
+              setMood((prevState) => ({ ...prevState, errorMessage }))
+            }
+          />
+        )}
+        {mood.currentStepId === "EMOTION" && (
+          <StepEmotion
+            emotion={mood.emotion}
+            setEmotion={(emotion: Emotion) =>
+              setMood((prevState) => ({ ...prevState, emotion }))
+            }
+            errorMessage={mood.errorMessage}
+            setErrorMessage={(errorMessage: string | null) =>
+              setMood((prevState) => ({ ...prevState, errorMessage }))
+            }
+          />
+        )}
+        {mood.currentStepId === "NOTE" && (
+          <StepNote
+            note={mood.note}
+            setNote={(note: string) =>
+              setMood((prevState) => ({ ...prevState, note }))
+            }
+          />
+        )}
+        {mood.currentStepId === "SUCCESS" && <StepMoodSuccess />}
+      </div>
 
       {/* Espace pour compenser la hauteur de la barre de navigation fixe */}
-      <div className="h-20"></div>
+      {mood.currentStepId !== "SUCCESS" && <div className="h-20" />}
 
       {/* Barre de navigation fixe */}
       {mood.currentStepId !== "SUCCESS" && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-10">
           <div className="flex justify-between max-w-md mx-auto">
-            <button
-              type="button"
-              onClick={handlePrevStep}
-              className="px-8 py-3 bg-gray-200 rounded-xl font-medium shadow-sm"
-            >
+            <Button type="button" onClick={handlePrevStep} variant="secondary">
               Previous
-            </button>
-            <button
-              type="button"
-              onClick={handleNextStep}
-              className="px-8 py-3 bg-[#2563EB] rounded-xl text-white font-medium shadow-sm"
-            >
+            </Button>
+            <Button type="button" onClick={handleNextStep} variant="primary">
               Next
-            </button>
+            </Button>
           </div>
         </div>
       )}
