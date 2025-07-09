@@ -4,13 +4,13 @@ import usePouchDb from "../../hooks/usePouchDb";
 import { useUserStore } from "../../store/userStore";
 import { FavColor, Friend, Gender, UserInfo } from "../../types/UserInfo";
 import Button from "../ui/Button";
-import OnboardingSuccess from "./StepSuccess";
 import StepConfirm from "./StepConfirm";
 import StepFavColor from "./StepFavColor";
 import StepFriend from "./StepFriend";
 import StepGender from "./StepGender";
 import StepUsername from "./StepName";
 import StepSplash from "./StepSplash";
+import StepOnboardingSuccess from "./StepOnboardingSuccess";
 
 interface OnboardingFormProps {
   setOnboardingCompleted: (completed: boolean) => void;
@@ -23,7 +23,7 @@ const ONBOARDING_STEPS = [
   { id: "FAVCOLOR", component: StepFavColor },
   { id: "FRIEND", component: StepFriend },
   { id: "CONFIRM", component: StepConfirm },
-  { id: "SUCCESS", component: OnboardingSuccess },
+  { id: "SUCCESS", component: StepOnboardingSuccess },
 ];
 
 const OnboardingForm: React.FC<OnboardingFormProps> = ({
@@ -172,7 +172,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
           )}
           {currentStepId == "CONFIRM" && <StepConfirm />}
           {currentStepId == "SUCCESS" && (
-            <OnboardingSuccess username={user.username} />
+            <StepOnboardingSuccess username={user.username} />
           )}
           {currentStepId !== "SPLASH" && currentStepId !== "SUCCESS" && (
             <div className="h-20" />
@@ -203,14 +203,16 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({
           </div>
         )}
         {currentStepId === "SUCCESS" && (
-          <Button
-            as={Link}
-            to="/mood"
-            onClick={() => setOnboardingCompleted(true)}
-            variant="primary"
-          >
-            {loading ? "Loading..." : "Start your journey"}
-          </Button>
+          <div className="flex justify-center p-4">
+            <Button
+              as={Link}
+              to="/mood"
+              onClick={() => setOnboardingCompleted(true)}
+              variant="primary"
+            >
+              {loading ? "Loading..." : "Start your journey"}
+            </Button>
+          </div>
         )}
       </form>
     </>

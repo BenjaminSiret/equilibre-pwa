@@ -33,19 +33,23 @@ const StepFriend: React.FC<StepFriendProps> = ({
         <div className="min-h-40 flex p-4 pt-8 flex-col">
           <fieldset>
             <legend className="text-lg mb-4">Select your friend</legend>
-            {friends.map((friendItem, index) => (
-              <RadioCard
-                key={friendItem}
-                onChange={(value) => handleSetFriend(value as Friend)}
-                value={friendItem}
-                checked={friend === friendItem}
-                name="friend"
-                label={friendItem.charAt(0).toUpperCase() + friendItem.slice(1)}
-                fullWidth={true}
-                autofocus={index === 0}
-                aria-describedby={errorMessage ? "friend-error" : undefined}
-              />
-            ))}
+            <div className="flex flex-col gap-2">
+              {friends.map((friendItem, index) => (
+                <RadioCard
+                  key={friendItem}
+                  onChange={(value) => handleSetFriend(value as Friend)}
+                  value={friendItem}
+                  checked={friend === friendItem}
+                  name="friend"
+                  label={
+                    friendItem.charAt(0).toUpperCase() + friendItem.slice(1)
+                  }
+                  fullWidth={true}
+                  autofocus={index === 0}
+                  aria-describedby={errorMessage ? "friend-error" : undefined}
+                />
+              ))}
+            </div>
           </fieldset>
           <div className="h-6 mt-2">
             {errorMessage && (
